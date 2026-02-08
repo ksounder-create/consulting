@@ -248,6 +248,25 @@ footer {
 }
 
 /* ================================
+   STAY CONNECTED PAGE
+   ================================ */
+
+.quiet-note {
+    font-size: 0.85rem;
+    color: #555;
+}
+
+input[type="email"] {
+    font-size: 1rem;
+    padding: 0.4rem;
+}
+
+button {
+    font-size: 0.95rem;
+    padding: 0.4rem 0.8rem;
+}
+
+/* ================================
    MOBILE
    ================================ */
 
