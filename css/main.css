@@ -267,6 +267,20 @@ button {
 }
 
 /* ================================
+   SUPPORT PAGE
+   ================================ */
+
+button {
+    font-size: 0.95rem;
+    padding: 0.4rem 0.9rem;
+}
+
+input[type="radio"],
+input[type="checkbox"] {
+    margin-right: 0.4rem;
+}
+
+/* ================================
    MOBILE
    ================================ */
 
