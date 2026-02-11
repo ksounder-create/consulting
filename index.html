@@ -242,6 +242,26 @@ A structured course is now available for those who wish to study the method dire
   </p>
 </footer>
 
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+
+  if (window.innerWidth <= 768) {
+
+    const toggles = document.querySelectorAll(".dropdown-toggle");
+
+    toggles.forEach(toggle => {
+      toggle.addEventListener("click", function (e) {
+        e.preventDefault();
+        const parent = this.parentElement;
+        parent.classList.toggle("open");
+      });
+    });
+
+  }
+
+});
+</script>
+    
 </body>
 </html>
 
