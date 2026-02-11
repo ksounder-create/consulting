@@ -18,6 +18,12 @@
   }
 }
 
+@media (max-width: 768px) {
+    .dropdown.open > .dropdown-toggle::after {
+        content: " ▴";
+    }
+}
+
 /* ================================
    GLOBAL
    ================================ */
