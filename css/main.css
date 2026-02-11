@@ -9,13 +9,32 @@ html {
 }
 
 body {
-    font-family: 'Inter', sans-serif;
-    font-weight: 400;
-    line-height: 1.65;
-    color: #1a1a1a;
-    background-color: #ffffff;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
+                 Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-size: 17px;
+    line-height: 1.7;
+    color: var(--text);
+    background-color: var(--bg);
     margin: 0;
     padding: 0;
+}
+
+/* ================================
+   COLOR VARIABLES
+   ================================ */
+
+:root {
+  --bg: #ffffff;
+  --text: #111111;
+  --muted: #555555;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #0e0e0e;
+    --text: #eaeaea;
+    --muted: #aaaaaa;
+  }
 }
 
 /* ================================
@@ -36,14 +55,13 @@ h1 {
     font-size: 2.2rem;
     font-weight: 600;
     line-height: 1.3;
-    margin-bottom: 1.2rem;
+    margin-bottom: 0.6em;
 }
 
 h2 {
     font-size: 1.6rem;
     font-weight: 600;
-    margin-top: 3rem;
-    margin-bottom: 1rem;
+    margin-top: 2em;
 }
 
 h3 {
@@ -58,6 +76,7 @@ h3 {
    ================================ */
 
 p {
+    max-width: 70ch;
     margin-bottom: 1.4rem;
 }
 
@@ -70,7 +89,7 @@ strong {
    ================================ */
 
 a {
-    color: #1a1a1a;
+    color: inherit;
     text-decoration: underline;
     text-underline-offset: 3px;
 }
@@ -79,33 +98,14 @@ a:hover {
     text-decoration: none;
 }
 
-@media print {
-  body {
-    font-size: 12pt;
-    line-height: 1.6;
-    color: black;
-    background: white;
-  }
-
-  nav, footer {
-    display: none;
-  }
-
-  h1, h2, h3 {
-    page-break-after: avoid;
-  }
-
-  section {
-    page-break-inside: avoid;
-  }
-}
-
 /* ================================
    NAVIGATION
    ================================ */
 
 nav {
     border-bottom: 1px solid #e0e0e0;
+    position: relative;
+    z-index: 500;
 }
 
 nav ul {
@@ -115,7 +115,7 @@ nav ul {
     list-style: none;
     display: flex;
     flex-wrap: wrap;
-    gap: 18px;
+    gap: 24px;
 }
 
 nav a {
@@ -123,95 +123,16 @@ nav a {
     font-weight: 500;
 }
 
-:root {
-  --bg: #ffffff;
-  --text: #111111;
-  --muted: #555555;
-  --accent: #1a4fd8;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg: #0e0e0e;
-    --text: #eaeaea;
-    --muted: #aaaaaa;
-    --accent: #6ea0ff;
-  }
-}
-
-body {
-  background-color: var(--bg);
-  color: var(--text);
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
-  line-height: 1.7;
-}
-
-body {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI",
-               Roboto, "Helvetica Neue", Arial, sans-serif;
-  font-size: 17px;
-  line-height: 1.7;
-}
-
-h1 {
-  font-size: 2.2rem;
-  margin-bottom: 0.6em;
-}
-
-h2 {
-  font-size: 1.6rem;
-  margin-top: 2em;
-}
-
-p {
-  max-width: 70ch;
-}
-
-section {
-  margin-bottom: 3rem;
-}
-
-.funder-summary {
-  margin: 3rem 0;
-  padding: 1.5rem;
-  border-left: 3px solid #444;
-  background-color: #fafafa;
-}
-
-.funder-summary h2 {
-  margin-top: 0;
-  font-weight: 600;
-}
-
 /* ================================
    DROPDOWN NAVIGATION
    ================================ */
 
-/* Top-level nav list */
-.nav-level-1 {
-    max-width: 760px;
-    margin: 0 auto;
-    padding: 16px 24px;
-    list-style: none;
-    display: flex;
-    flex-wrap: wrap;
-    gap: 24px;
-}
-
-/* Top-level items */
 .nav-level-1 > li {
     position: relative;
 }
 
-/* Top-level links */
-.nav-level-1 > li > a {
-    text-decoration: none;
-    font-weight: 500;
-}
-
-/* Second-level dropdown */
 .nav-level-2 {
-    display: none;              /* Hidden by default */
+    display: none;
     position: absolute;
     top: 100%;
     left: 0;
@@ -225,16 +146,10 @@ section {
 
     min-width: 220px;
 
-    /* Override inherited flex from nav ul */
     flex-direction: column;
+    z-index: 1000; /* critical fix */
 }
 
-/* Ensure dropdown ul is NOT flex */
-nav .nav-level-2 {
-    display: none;
-}
-
-/* Dropdown items */
 .nav-level-2 li {
     margin-bottom: 8px;
 }
@@ -243,18 +158,17 @@ nav .nav-level-2 {
     margin-bottom: 0;
 }
 
-/* Show dropdown on hover */
 .dropdown:hover > .nav-level-2 {
     display: block;
 }
 
 /* ================================
-   MOBILE ADJUSTMENT
+   MOBILE NAVIGATION
    ================================ */
 
 @media (max-width: 768px) {
 
-    .nav-level-1 {
+    nav ul {
         flex-direction: column;
         gap: 12px;
     }
@@ -263,7 +177,7 @@ nav .nav-level-2 {
         position: static;
         border: none;
         padding-left: 16px;
-        display: block;   /* Always visible in mobile stacked mode */
+        display: block;
     }
 }
 
@@ -279,19 +193,7 @@ nav .nav-level-2 {
 }
 
 /* ================================
-   FOOTER
-   ================================ */
-
-footer {
-    text-align: center;
-    font-size: 0.9rem;
-    color: #666;
-    margin-top: 6rem;
-    padding-bottom: 3rem;
-}
-
-/* ================================
-   CLOSING FILTER (Homepage)
+   HOMEPAGE CLOSING FILTER
    ================================ */
 
 .closing-filter {
@@ -299,14 +201,9 @@ footer {
     padding-top: 2rem;
 }
 
-.closing-filter p {
-    margin-left: auto;
-    margin-right: auto;
-}
-
 .closing-filter .quiet-note {
     font-size: 0.85rem;
-    color: #555;
+    color: var(--muted);
 }
 
 .closing-filter .action-links {
@@ -315,29 +212,30 @@ footer {
     font-size: 0.95rem;
 }
 
-.closing-filter .action-links a {
-    text-decoration: underline;
-    text-underline-offset: 3px;
-    color: inherit;
-}
-
 /* ================================
-   FOOTER QUALIFIER
+   FOOTER
    ================================ */
+
+footer {
+    text-align: center;
+    font-size: 0.9rem;
+    color: var(--muted);
+    margin-top: 6rem;
+    padding-bottom: 3rem;
+}
 
 .footer-qualifier {
     font-size: 0.75rem;
-    color: #666;
     margin-top: 0.5rem;
 }
 
 /* ================================
-   STAY CONNECTED PAGE
+   FORMS
    ================================ */
 
 .quiet-note {
     font-size: 0.85rem;
-    color: #555;
+    color: var(--muted);
 }
 
 input[type="email"] {
@@ -347,16 +245,7 @@ input[type="email"] {
 
 button {
     font-size: 0.95rem;
-    padding: 0.4rem 0.8rem;
-}
-
-/* ================================
-   SUPPORT PAGE
-   ================================ */
-
-button {
-    font-size: 0.95rem;
-    padding: 0.4rem 0.9rem;
+    padding: 0.5rem 1rem;
 }
 
 input[type="radio"],
@@ -365,10 +254,11 @@ input[type="checkbox"] {
 }
 
 /* ================================
-   MOBILE
+   MOBILE CONTENT
    ================================ */
 
 @media (max-width: 768px) {
+
     html {
         font-size: 17px;
     }
@@ -389,3 +279,4 @@ input[type="checkbox"] {
         margin-bottom: 1.5rem;
     }
 }
+
